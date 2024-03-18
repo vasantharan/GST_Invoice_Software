@@ -8,7 +8,7 @@ import Card from "react-bootstrap/Card";
 import { InvoiceItem, InvoiceModal } from "../components/index";
 import InputGroup from "react-bootstrap/InputGroup";
 
-class InvoiceForm extends React.Component {
+class InvoiceForm extends React.Component { 
   constructor(props) {
     super(props);
     const { invoiceData: data } = this.props;
@@ -24,7 +24,7 @@ class InvoiceForm extends React.Component {
         billToEmail: info.billToEmail,
         billToAddress: info.billToAddress,
         billFrom: "Govindasamy & Co.",
-        billFromEmail: "govindasamy.textile@gmail.com",
+        billFromEmail: "GST Number",
         billFromAddress: "65, Kamaraj Street, Erode - 638 001",
         notes: info.notes,
         total: total,
@@ -44,18 +44,18 @@ class InvoiceForm extends React.Component {
       isOpen: false,
       currency: " ₹.",
       currentDate: "",
-      invoiceNumber: "",
+      invoiceNumber: "1",
       dateOfIssue: "",
       billTo: "",
       billToEmail: "",
-      billToAddress: "",
+      billToAddress: "", 
       billFrom: "Govindasamy & Co.",
-      billFromEmail: "govindasamy.textile@gmail.com",
+      billFromEmail: "GST Number",
       billFromAddress: "65, Kamaraj Street, Erode - 638 001",
       notes: "",
       total: 0.0,
       subTotal: 0.0,
-      taxRate: 0.0,
+      taxRate: 5.0,
       taxAmmount: 0.0,
       discountRate: 0.0,
       discountAmmount: 0.0,
@@ -63,7 +63,7 @@ class InvoiceForm extends React.Component {
         {
           id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
           name: "",
-          description: "",
+          // description: "",
           price: 0.0,
           quantity: 0,
         },
@@ -83,7 +83,7 @@ class InvoiceForm extends React.Component {
       id: id,
       name: "",
       price: 1.0,
-      description: "",
+      // description: "",
       quantity: 1,
     };
     this.state.items.push(items);
@@ -379,37 +379,41 @@ class InvoiceForm extends React.Component {
               />
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Currency:</Form.Label>
+                <br/>
                 <Form.Select
                   onChange={(event) =>
                     this.onCurrencyChange({ currency: event.target.value })
                   }
-                  className="btn btn-light my-1"
+                  className="btn btn-light my-1 custom"
+                  style={{ 
+                    WebkitAppearance: 'none', 
+                    MozAppearance: 'none', 
+                    appearance: 'none',
+                    paddingRight: '1.75rem', // Adjust as needed
+                    backgroundImage: 'url("")', // Remove the icon
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 0.75rem center',
+                    cursor: 'pointer'
+                  }}
                   aria-label="Change Currency" disabled
                 >
                   <option value="₹">INR (Indian Rupees)</option>
-                  {/* <option value="£">GBP (British Pound Sterling)</option>
-                  <option value="¥">JPY (Japanese Yen)</option>
-                  <option value="$">CAD (Canadian Dollar)</option>
-                  <option value="$">AUD (Australian Dollar)</option>
-                  <option value="$">SGD (Signapore Dollar)</option>
-                  <option value="¥">CNY (Chinese Renminbi)</option>
-                  <option value="₿">BTC (Bitcoin)</option> */}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="my-3">
                 <Form.Label className="fw-bold">Tax rate:</Form.Label>
                 <InputGroup className="my-1 flex-nowrap">
-                  <Form.Control
-                    name="taxRate"
-                    type="number"
-                    value={this.state.taxRate}
-                    onChange={(event) => this.editField(event)}
-                    className="bg-white border"
-                    placeholder="5.0"
-                    min="5.00"
-                    step="1.0" 
-                    max="18.00"
-                  />
+                <Form.Select
+                  name="taxRate"
+                  value={this.state.taxRate}
+                  onChange={(event) => this.editField(event)}
+                  className="btn btn-light w-20"
+                >
+                  <option value="5.0">5%</option>
+                  <option value="12.0">12%</option>
+                  <option value="18.0">18%</option>
+                  <option value="28.0">28%</option>
+                </Form.Select>
                   <InputGroup.Text className="bg-light fw-bold text-secondary small">
                     %
                   </InputGroup.Text>
